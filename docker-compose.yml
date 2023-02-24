@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  user-api:
+    build: src/TestTask.UserApi
+    ports:
+      - "8081:80"
+    environment:
+      ConnectionStrings__PostgresConnection: "Server=postgres;Port=5432;Database=user_db;User Id=postgres;Password=SuperSecret;"
+  project-api:
+    build: src/TestTask.ProjectApi
+    ports:
+      - "8082:80"
+    environment:
+      MongoDb__ConnectionUri: "mongodb://mongo:27017"
+      MongoDb__DatabaseName: project_db
+      UserApiHost: "http://user-api"
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: SuperSecret
+  mongo:
+    image: mongo
