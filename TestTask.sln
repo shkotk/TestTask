@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{88223405-A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTask.UserApi.Tests", "test\TestTask.UserApi.Tests\TestTask.UserApi.Tests.csproj", "{08A32CE6-834B-4260-A949-7CE33ABBFCAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTask.EndToEndTests", "test\TestTask.EndToEndTests\TestTask.EndToEndTests.csproj", "{6BDFFE6B-154A-4DB5-BA91-1696E0AC2C07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,7 @@ Global
 		{AE9E78E1-BA95-4B9F-9B09-0A0D91BEE98F} = {D1467BC1-DE1D-4C78-9A7E-068098380823}
 		{9CA9B9AB-7396-4A85-806A-EBD979DC8FC9} = {D1467BC1-DE1D-4C78-9A7E-068098380823}
 		{08A32CE6-834B-4260-A949-7CE33ABBFCAE} = {88223405-A651-4855-9DE6-E11BB8B9B38A}
+		{6BDFFE6B-154A-4DB5-BA91-1696E0AC2C07} = {88223405-A651-4855-9DE6-E11BB8B9B38A}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AE9E78E1-BA95-4B9F-9B09-0A0D91BEE98F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -33,5 +36,9 @@ Global
 		{08A32CE6-834B-4260-A949-7CE33ABBFCAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08A32CE6-834B-4260-A949-7CE33ABBFCAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08A32CE6-834B-4260-A949-7CE33ABBFCAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BDFFE6B-154A-4DB5-BA91-1696E0AC2C07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BDFFE6B-154A-4DB5-BA91-1696E0AC2C07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BDFFE6B-154A-4DB5-BA91-1696E0AC2C07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BDFFE6B-154A-4DB5-BA91-1696E0AC2C07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

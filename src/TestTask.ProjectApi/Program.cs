@@ -27,3 +27,8 @@ var app = builder.Build();
 app.MapControllers();
 
 app.Run();
+
+namespace TestTask.ProjectApi
+{
+    public partial class Program { }
+}

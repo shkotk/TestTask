@@ -1,4 +1,3 @@
-using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -32,3 +31,8 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
+
+namespace TestTask.UserApi
+{
+    public partial class Program { }
+}
