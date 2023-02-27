@@ -20,6 +20,6 @@ public class PopularIndicatorsController : ControllerBase
     [HttpGet("{subscriptionType}")]
     public async Task<IActionResult> Get([FromRoute] string subscriptionType, CancellationToken cancellationToken)
     {
-        return Ok(await _popularIndicatorService.Get(subscriptionType, top: 3, cancellationToken));
+        return Ok(await _popularIndicatorService.GetAsync(subscriptionType, top: 3, cancellationToken));
     }
 }

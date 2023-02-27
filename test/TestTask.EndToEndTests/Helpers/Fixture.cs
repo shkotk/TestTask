@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
@@ -27,30 +28,33 @@ public class Fixture : IDisposable
             .UseNpgsql(pgConnectionString)
             .Options;
         
-        // Arrange Mongo connection
-        _mongoConnectionString = ConfigManager.Configuration.GetConnectionString("MongoConnection");
-        _mongoDbName = "project-db-" + Guid.NewGuid();
-        
         // Arrange UserApi
         UserApiHttpClient = new WebApplicationFactory<UserApi.Program>()
             .WithWebHostBuilder(builder =>
-                builder.ConfigureAppConfiguration((_, config) =>
-                    config.AddInMemoryCollection(new Dictionary<string, string>
-                    {
-                        ["ConnectionStrings:PostgresConnection"] = pgConnectionString,
-            })))
+            {
+                var config = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
+                {
+                    ["ConnectionStrings:PostgresConnection"] = pgConnectionString,
+                }).Build();
+                builder.UseConfiguration(config);
+            })
             .CreateClient();
+        
+        // Arrange Mongo connection
+        _mongoConnectionString = ConfigManager.Configuration.GetConnectionString("MongoConnection");
+        _mongoDbName = "project-db-" + Guid.NewGuid();
         
         // Arrange ProjectApi
         var userApiClient = new ProjectApi.Services.UserApiClient(UserApiHttpClient);
         ProjectApiHttpClient = new WebApplicationFactory<ProjectApi.Program>().WithWebHostBuilder(builder =>
             {
-                builder.ConfigureAppConfiguration((_, config) =>
-                    config.AddInMemoryCollection(new Dictionary<string, string>
+                var config = new ConfigurationBuilder().AddInMemoryCollection(
+                    new Dictionary<string, string>
                     {
                         ["MongoDb:ConnectionUri"] = _mongoConnectionString,
                         ["MongoDb:DatabaseName"] = _mongoDbName,
-                    }));
+                    }).Build();
+                builder.UseConfiguration(config);
                 builder.ConfigureTestServices(services => services.Replace(
                     new ServiceDescriptor(typeof(ProjectApi.Interfaces.IUserApiClient), userApiClient)));
             })

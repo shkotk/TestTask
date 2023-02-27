@@ -21,7 +21,7 @@ public class PopularIndicatorsService : IPopularIndicatorService
         _userApiClient = userApiClient ?? throw new ArgumentNullException(nameof(userApiClient));
     }
 
-    public async Task<ICollection<PopularIndicator>> Get(string subscriptionType, int top, CancellationToken cancellationToken)
+    public async Task<ICollection<PopularIndicator>> GetAsync(string subscriptionType, int top, CancellationToken cancellationToken)
     {
         // I'm pretty sure that it isn't the best query, but I'm not an expert of MongoDB and had no time to read enough docs :(
         using var cursor = await _projectsCollection.AsQueryable(new AggregateOptions {BatchSize = 1000}) // TODO move batch size to config

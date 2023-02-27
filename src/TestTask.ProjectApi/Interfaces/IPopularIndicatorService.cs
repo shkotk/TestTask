@@ -7,5 +7,5 @@ namespace TestTask.ProjectApi.Interfaces;
 
 public interface IPopularIndicatorService
 {
-    Task<ICollection<PopularIndicator>> Get(string subscriptionType, int top, CancellationToken cancellationToken);
+    Task<ICollection<PopularIndicator>> GetAsync(string subscriptionType, int top, CancellationToken cancellationToken);
 }
