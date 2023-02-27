@@ -36,12 +36,11 @@ public class EndToEndTests : IClassFixture<Fixture>
         var responses = new List<HttpResponseMessage>();
         foreach (var body in requestBodies)
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, "/user");
-            request.Content = new StringContent(body, Encoding.UTF8, "application/json");
-            // I have no idea why, but all calls to http client return 404.
-            // I've even tried to use good old Startup/Program definitions (without top-level statements) but it didn't work either.
-            // Either WebApplicationFactory is broken, or I'm missing something.
-            var response = await _fixture.UserApiHttpClient.SendAsync(request);
+            var response = await _fixture.UserApiHttpClient.SendAsync(
+                new HttpRequestMessage(HttpMethod.Post, "/user")
+                {
+                    Content = new StringContent(body, Encoding.UTF8, "application/json"),
+                });
             responses.Add(response);
         }
         
@@ -66,6 +65,6 @@ public class EndToEndTests : IClassFixture<Fixture>
         Assert.Equal(3, users[2].Id);
         Assert.Equal("Taras Ovruch", users[2].Name);
         Assert.Equal("Taras@example.com", users[2].Email);
-        Assert.Null(users[3].SubscriptionId);
+        Assert.Null(users[2].SubscriptionId);
     }
 }

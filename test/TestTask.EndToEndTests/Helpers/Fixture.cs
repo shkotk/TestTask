@@ -43,7 +43,7 @@ public class Fixture : IDisposable
         
         // Arrange ProjectApi
         var userApiClient = new ProjectApi.Services.UserApiClient(UserApiHttpClient);
-        UserApiHttpClient = new WebApplicationFactory<ProjectApi.Program>().WithWebHostBuilder(builder =>
+        ProjectApiHttpClient = new WebApplicationFactory<ProjectApi.Program>().WithWebHostBuilder(builder =>
             {
                 builder.ConfigureAppConfiguration((_, config) =>
                     config.AddInMemoryCollection(new Dictionary<string, string>
@@ -56,9 +56,11 @@ public class Fixture : IDisposable
             })
             .CreateClient();
     }
+
     public UserApi.UserDbContext GetDbContext() => new(_contextOptions);
     public IMongoDatabase GetMongoDb() => new MongoClient(_mongoConnectionString).GetDatabase(_mongoDbName);
     public HttpClient UserApiHttpClient { get; }
+    public HttpClient ProjectApiHttpClient { get; }
 
     private readonly DbContextOptions<UserApi.UserDbContext> _contextOptions;
     private readonly string _mongoConnectionString;
